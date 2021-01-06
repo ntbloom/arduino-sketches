@@ -1,7 +1,7 @@
 CLI  = arduino-cli
 FQBN = arduino:samd:mkr1000
 PORT = /dev/ttyACM0
-INO  = rain_lcd.ino
+INO  = basic_lcd.ino
 
 build: 
 	$(CLI) compile --fqbn $(FQBN) $(INO)
