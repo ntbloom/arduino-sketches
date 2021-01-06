@@ -1,8 +1,11 @@
-#include <LiquidCrystal.h>
 
-/* Prototype for printing temperature data on a 16x2 LCD screen
+/* temp_lcd.ino
+ *
+ * Prototype for printing temperature data on a 16x2 LCD screen
  *
  */
+
+#include <LiquidCrystal.h>
 
 #define RS 12
 #define EN 11
@@ -10,11 +13,15 @@
 #define D5 3
 #define D6 4
 #define D7 5
-#define TEMP_PIN A1
+#define BRIGHT_PIN 18  // marked as A3
+#define BRIGHTNESS 0
+#define TEMP_PIN 16  // marked as A1
 #define TEMP_VOLTAGE 3.3
 #define TEMP_UNIT 'F'
 
 LiquidCrystal LCD(RS, EN, D4, D5, D6, D7);
+String TEMP_STR;
+int TEMP_VAL;
 
 /* read temperature from TMP36 sensor
  * specify analog pin, voltage, and unit 'F' or 'C'
@@ -34,31 +41,40 @@ int get_temp(int pin, float voltage, char unit) {
   }
 }
 
-/* write the temperature to the LCD, specify 'F' or 'C' */
-void write_temp(int pin, float voltage, char unit) {
-  int temp = get_temp(pin, voltage, unit);
-  String s;
+/* convert temp to string */
+String temp_to_str(int temp, char unit) {
+  String s, t;
+
+  if (temp > 0) {
+    t = "+" + String(temp);
+  } else if (temp == 0) {
+    t = " " + String(temp);
+  } else {
+    t = String(temp);
+  }
+
   switch (unit) {
     case 'F':
-      s = "F";
+      s = t + "F";
       break;
     case 'C':
-      s = "C";
+      s = t + "C";
       break;
     default:
-      s = "?";
+      s = t + "?";
   }
-  LCD.print(temp + s);
+  return s;
 }
 
 void setup() {
-  analogWrite(A3, 0);  // set the brightness
+  analogWrite(BRIGHT_PIN, BRIGHTNESS);  // set the brightness
   LCD.begin(16, 2);
 }
 
 void loop() {
   LCD.clear();
-  write_temp(TEMP_PIN, TEMP_VOLTAGE, TEMP_UNIT);
-  LCD.setCursor(0, 1);
-  delay(5000);
+  TEMP_VAL = get_temp(TEMP_PIN, TEMP_VOLTAGE, TEMP_UNIT);
+  TEMP_STR = temp_to_str(TEMP_VAL, TEMP_UNIT);
+  LCD.print(TEMP_STR);
+  delay(1000);
 }
