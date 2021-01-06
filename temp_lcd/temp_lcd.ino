@@ -16,17 +16,27 @@
 
 LiquidCrystal LCD(RS, EN, D4, D5, D6, D7);
 
-/* read temperature from TMP36 sensor using +3.3v on pin A1 */
-int get_temp(int pin, float voltage) {
+/* read temperature from TMP36 sensor
+ * specify analog pin, voltage, and unit 'F' or 'C'
+ */
+int get_temp(int pin, float voltage, char unit) {
   int reading = analogRead(pin);
   float intermed = reading * voltage / 1024;
   float temp_c = (intermed - 0.5) * 100;  // 10mv per degree with 500 mV offset
-  int temp_f = (int)(temp_c * 9.0 / 5.0) + 32.0;
-  return temp_f;
+  float temp_f = (temp_c * 9.0 / 5.0) + 32.0;
+  switch (unit) {
+    case 'F':
+      return (int)temp_f;
+    case 'C':
+      return (int)temp_c;
+    default:
+      return -99;
+  }
 }
 
 /* write the temperature to the LCD, specify 'F' or 'C' */
-void write_temp(int temp, char unit) {
+void write_temp(int pin, float voltage, char unit) {
+  int temp = get_temp(pin, voltage, unit);
   String s;
   switch (unit) {
     case 'F':
@@ -48,7 +58,7 @@ void setup() {
 
 void loop() {
   LCD.clear();
-  int temp = get_temp(TEMP_PIN, TEMP_VOLTAGE);
-  write_temp(temp, TEMP_UNIT);
+  write_temp(TEMP_PIN, TEMP_VOLTAGE, TEMP_UNIT);
+  LCD.setCursor(0, 1);
   delay(5000);
 }
