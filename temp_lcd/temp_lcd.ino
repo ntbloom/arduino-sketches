@@ -1,4 +1,3 @@
-
 /* temp_lcd.ino
  *
  * Prototype for printing temperature data on a 16x2 LCD screen
