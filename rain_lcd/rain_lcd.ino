@@ -14,32 +14,38 @@
 #define D7 5
 #define BRIGHT_PIN 18  // marked as A3
 #define BRIGHTNESS 0
-#define RAIN_PIN 9
+#define RAIN_PIN 8
 #define UNIT "standard"
 #define GAUGE_IN 0.11
 #define GAUGE_MM 0.2794
 
-LiquidCrystal LCD(RS, EN, D4, D5, D6, D7);
+// LiquidCrystal LCD(RS, EN, D4, D5, D6, D7);
 static float total_rain;
 volatile int clicks;
 static int rain_state;
 
 /* add more clicks to the gauge */
-void count() { clicks++; }
+void count() {
+  clicks++;
+  // LCD.clear();
+  // LCD.print(clicks);
+}
 
 void setup() {
-  analogWrite(BRIGHT_PIN, BRIGHTNESS);  // set the brightness
-  LCD.begin(16, 2);
+  // analogWrite(BRIGHT_PIN, BRIGHTNESS);  // set the brightness
+  // LCD.begin(16, 2);
+  Serial.begin(9600);
   pinMode(RAIN_PIN, INPUT);
-  attachInterrupt(digitalPinToInterrupt(RAIN_PIN), count, FALLING);
+  attachInterrupt(RAIN_PIN, count, FALLING);
 }
 
 void loop() {
-  LCD.clear();
-  LCD.print(total_rain);
+  // LCD.clear();
+  // LCD.print(total_rain);
 
-  LCD.setCursor(0, 1);
-  rain_state = digitalRead(RAIN_PIN);
-  LCD.print(clicks);
+  // LCD.setCursor(0, 1);
+  // rain_state = digitalRead(RAIN_PIN);
+  // LCD.print(clicks);
+  Serial.println(clicks);
   delay(1000);
 }
