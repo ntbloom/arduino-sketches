@@ -4,12 +4,17 @@
  *
  */
 
-volatile int PIN = 6;
+volatile int PIN = 5;
 volatile int clicks;
+unsigned long debounce_delay = 100;
+unsigned long last_debounce = 0;
 
 /* count clicks */
 void count() {
-  clicks++;
+  if ((millis() - last_debounce) < debounce_delay) {
+    clicks++;
+  }
+  last_debounce = millis();
 }
 
 void setup() {
@@ -20,7 +25,8 @@ void setup() {
 
 void loop() {
   noInterrupts();
-  Serial.println(clicks);
+  int result = clicks;
   interrupts();
 
+  Serial.println(result);
 }

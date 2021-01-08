@@ -10,5 +10,3 @@ upload:
 	$(CLI) upload -p $(PORT) --fqbn $(FQBN) $(INO) 
 
 all: build	upload
-	sleep 3
-	/usr/bin/cat /dev/ttyACM0
