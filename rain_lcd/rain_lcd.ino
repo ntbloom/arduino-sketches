@@ -4,7 +4,7 @@
  *
  */
 
-#include <LiquidCrystal.h>
+//#include <LiquidCrystal.h>
 
 #define RS 12
 #define EN 11
@@ -14,7 +14,7 @@
 #define D7 5
 #define BRIGHT_PIN 18  // marked as A3
 #define BRIGHTNESS 0
-#define RAIN_PIN 8
+#define RAIN_PIN 6
 #define UNIT "standard"
 #define GAUGE_IN 0.11
 #define GAUGE_MM 0.2794
@@ -36,7 +36,7 @@ void setup() {
   // LCD.begin(16, 2);
   Serial.begin(9600);
   pinMode(RAIN_PIN, INPUT);
-  attachInterrupt(RAIN_PIN, count, FALLING);
+  attachInterrupt(RAIN_PIN, count, RISING);
 }
 
 void loop() {
@@ -46,6 +46,10 @@ void loop() {
   // LCD.setCursor(0, 1);
   // rain_state = digitalRead(RAIN_PIN);
   // LCD.print(clicks);
-  Serial.println(clicks);
+  
+  noInterrupts();
+  int result = clicks;
+  Serial.println(result);
+  interrupts();
   delay(1000);
 }
