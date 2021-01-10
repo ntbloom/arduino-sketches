@@ -17,8 +17,8 @@ void printWeather() {
 void getSizeof() {
     // lcd.print(sizeof(HIGH));
     unsigned char c = 'a';
-    bool b = true;
-    lcd.print(sizeof(b));
+    bool b = HIGH;
+    lcd.print(b);
 }
 
 void setup() {

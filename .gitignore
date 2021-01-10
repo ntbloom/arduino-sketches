@@ -1,1 +1,4 @@
 *.swp
+
+# symlink arduino core libs instead of vendoring
+cores  
