@@ -9,6 +9,7 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
 /* prototyping what a weather printout might look like */
 void printWeather() {
+    lcd.clear();
     lcd.print("10.25\" since");
     lcd.setCursor(0, 1);
     lcd.print("12/31 14:21  90F");
@@ -25,7 +26,8 @@ void setup() {
     /* prototyping how the LCD screen might look */
     analogWrite(A3, 0);  // brightness
     lcd.begin(16, 2);
-    getSizeof();
+    // getSizeof();
+    printWeather();
 }
 
 void loop() {

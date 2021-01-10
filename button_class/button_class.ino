@@ -6,7 +6,7 @@
 
 #include <LiquidCrystal.h>
 
-#include "button.hpp"
+#include "../include/button.hpp"
 #define PIN 6
 #define DEBOUNCE_DELAY 50
 
