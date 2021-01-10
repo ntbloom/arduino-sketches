@@ -20,31 +20,33 @@ class Button {
     unsigned long m_msDelay;
     unsigned long m_lastDebounce;
     bool m_high;
-    bool m_read;
-    bool m_pressed;
+    bool m_read = LOW;
 
    public:
     Button(int pin, unsigned long msDelay, bool high) {
         m_pin = pin;
         m_msDelay = msDelay;
+        m_high = high;
+
         m_lastDebounce = 0;
         pinMode(m_pin, INPUT);
     }
 
     /* is the button pressed and valid (not bouncing) */
     bool isPressed() {
-        m_read = digitalRead(m_pin);
-
         // check if pin fired
+        m_read = digitalRead(m_pin);
         switch (m_high) {
             case HIGH:
                 if (!m_read) {
                     return false;
                 }
+                break;
             case LOW:
                 if (m_read) {
                     return false;
                 }
+                break;
         }
 
         // debounce it
@@ -68,8 +70,7 @@ void setup() {
 
 void loop() {
     if (button.isPressed()) {
-        clicks++;
         lcd.clear();
-        lcd.print(clicks);
+        lcd.print(++clicks);
     }
 }
