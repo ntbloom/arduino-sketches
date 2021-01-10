@@ -1,7 +1,7 @@
 CLI  = arduino-cli
 FQBN = arduino:samd:mkr1000
 PORT = /dev/ttyACM0
-INO  = hello_world.ino
+INO  = led_builtin.ino
 
 build: 
 	$(CLI) compile --fqbn $(FQBN) $(INO)
