@@ -3,7 +3,8 @@
 
 // symlink from appropriate location
 // possibly $HOME/.arduino15/packages/arduino/hardware/samd/x.y.z
-#include "cores/arduino/api/ArduinoAPI.h"
+//#include "cores/arduino/api/ArduinoAPI.h"
+#include "Arduino.h"
 
 /* basic class for controlling and debouncing buttons */
 namespace components {
