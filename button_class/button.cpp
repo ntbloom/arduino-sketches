@@ -1,5 +1,7 @@
 #include "button.hpp"
 
+using namespace components;
+
 /* is the button pressed and valid (not bouncing) */
 bool Button::isPressed() {
     // check if pin fired

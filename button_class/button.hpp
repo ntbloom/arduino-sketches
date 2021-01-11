@@ -6,6 +6,7 @@
 #include "cores/arduino/api/ArduinoAPI.h"
 
 /* basic class for controlling and debouncing buttons */
+namespace components {
 class Button {
    private:
     int m_pin;
@@ -25,5 +26,6 @@ class Button {
     };
     bool isPressed();
 };
+};  // namespace components
 
 #endif
