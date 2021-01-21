@@ -15,6 +15,13 @@ void printWeather() {
     lcd.print("12/31 14:21  90F");
 }
 
+void printUint8Array() {
+    uint8_t* val = new unit8_t[3];
+    for (int i = 0; i < 2; i++) {
+        val[i] = 01;
+    }
+}
+
 void getSizeof() {
     // lcd.print(sizeof(HIGH));
     unsigned char c = 'a';
