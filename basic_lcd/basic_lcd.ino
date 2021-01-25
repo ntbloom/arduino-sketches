@@ -27,7 +27,8 @@ void setup() {
     /* prototyping how the LCD screen might look */
     analogWrite(A3, 0);  // brightness
     lcd.begin(16, 2);
-    getSizeof();
+    // getSizeof();
+    lcd.print("/dev/ttyACM99");
     // printWeather();
 }
 
