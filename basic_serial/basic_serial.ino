@@ -22,9 +22,13 @@ void printUchar() {
         Serial.println(val[i]);
     }
 }
-void setup() {}
+int i = 0;
+void printInts() { Serial.println(i++); }
+
+void setup() { Serial.begin(9600); }
 
 void loop() {
-    printUchar();
+    // printUchar();
+    printInts();
     delay(5000);
 }

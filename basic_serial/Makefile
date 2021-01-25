@@ -1,6 +1,6 @@
 CLI  = arduino-cli
 FQBN = arduino:samd:mkr1000
-PORT = /dev/ttyACM0
+PORT = /dev/ttyACM99
 INO  = basic_serial.ino
 
 build: 
