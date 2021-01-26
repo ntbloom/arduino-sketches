@@ -29,6 +29,10 @@ void setup() { Serial.begin(9600); }
 
 void loop() {
     // printUchar();
-    printInts();
+    // printInts();
+    unsigned char expected[] = {1, 4, 15, 15, 14, 7};
+    for (int i = 0; i < 6; i++) {
+        Serial.println(expected[i], HEX);
+    }
     delay(5000);
 }
