@@ -25,14 +25,28 @@ void printUchar() {
 int i = 0;
 void printInts() { Serial.println(i++); }
 
-void setup() { Serial.begin(9600); }
+void altogetherNow() {
+    unsigned long start = micros();
+    Serial.begin(9600);
+    unsigned char expected[] = {1, 4, 15, 15, 14, 7};
+    for (int i = 0; i < 6; i++) {
+        Serial.print(expected[i], HEX);
+    }
+    Serial.println();
+    Serial.end();
+    unsigned long finish = micros();
+    Serial.begin(9600);
+    Serial.println(finish - start);
+    Serial.end();
+}
+
+void setup() {
+    // Serial.begin(9600);
+}
 
 void loop() {
     // printUchar();
     // printInts();
-    unsigned char expected[] = {1, 4, 15, 15, 14, 7};
-    for (int i = 0; i < 6; i++) {
-        Serial.println(expected[i], HEX);
-    }
+    altogetherNow();
     delay(5000);
 }
