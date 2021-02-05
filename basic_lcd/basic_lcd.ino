@@ -28,7 +28,9 @@ void setup() {
     analogWrite(A3, 0);  // brightness
     lcd.begin(16, 2);
     // getSizeof();
-    lcd.print("/dev/ttyACM99");
+    unsigned long big = 100;
+    unsigned long small = 1;
+    lcd.print(small - big);
     // printWeather();
 }
 

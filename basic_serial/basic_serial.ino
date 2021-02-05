@@ -35,7 +35,7 @@ void altogetherNow() {
     Serial.println();
     Serial.end();
     unsigned long finish = micros();
-    Serial.begin(9600);
+    Serial.begin(100);
     Serial.println(finish - start);
     Serial.end();
 }
@@ -47,6 +47,7 @@ void setup() {
 void loop() {
     // printUchar();
     // printInts();
-    altogetherNow();
+    // altogetherNow();
+    Serial.println("Hello, logic analyzer!");
     delay(5000);
 }
